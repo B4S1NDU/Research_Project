@@ -1,0 +1,3 @@
+difficulty,rows,cols,pieces,label,description,skillLevel,timeEstimate,educationalFocus
+easy,3,4,12,"Apprentice Restorer (12 pieces)","Perfect for beginners - larger pieces, easier assembly","Entry-level museum volunteer","5-8 minutes","Basic understanding of royal iconography"
+hard,4,6,24,"Master Conservator (24 pieces)","Museum expert level - smaller pieces, challenging restoration","Professional art conservator","10-15 minutes","Advanced analysis of artistic techniques and historical context"

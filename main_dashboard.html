@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Lankan Heritage Research Suite v2.0</title>
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-brown: #A68B64;
+            --light-tan: #E8DFCD;
+            --dark-neutral: #1A1A1A;
+            --body-text: #4A4A4A;
+            --bg-color: #F1EDE3;
+            --card-bg: #FFFFFF;
+            --success-green: #2D5A27;
+            --success-bg: #E8F5E9;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--body-text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0 40px;
+            overflow-x: hidden;
+        }
+
+        /* Watermark Pattern Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+            opacity: 0.4;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Decorative header vignette */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 0 150px rgba(166, 139, 100, 0.05);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+            max-width: 900px;
+        }
+
+        .header-icon {
+            font-size: 3.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .subtitle-main {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-brown);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-neutral);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .subheader {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--dark-neutral);
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .context-line {
+            font-size: 1rem;
+            color: var(--body-text);
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.7;
+        }
+
+        /* Hero Grid */
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(166, 139, 100, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-brown);
+        }
+
+        .card-icon-container {
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, #f9f7f2 0%, #ffffff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 3rem;
+            color: var(--primary-brown);
+            border: 1px solid var(--light-tan);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--dark-neutral);
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            color: var(--body-text);
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            background-color: var(--light-tan);
+            color: var(--dark-neutral);
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .status-badge {
+            background-color: var(--success-bg);
+            color: var(--success-green);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background-color: var(--success-green);
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--success-green);
+        }
+
+        .btn {
+            background-color: var(--primary-brown);
+            color: white;
+            text-decoration: none;
+            padding: 1.1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            width: 100%;
+            transition: var(--transition);
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+
+        .btn:hover {
+            background-color: #8E7654;
+            transform: scale(1.02);
+        }
+
+        /* Secondary Grid */
+        .secondary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 6rem;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px dashed var(--primary-brown);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-style: solid;
+        }
+
+        .info-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark-neutral);
+        }
+
+        .info-card p {
+            font-size: 0.85rem;
+            color: var(--body-text);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 5rem 0 3rem 0;
+            width: 100%;
+            max-width: 1200px;
+            border-top: 1px solid rgba(166, 139, 100, 0.2);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            margin-bottom: 2rem;
+            display: block;
+            opacity: 0.8;
+        }
+
+        .footer-badges {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-neutral);
+        }
+
+        .badge-icon {
+            color: var(--primary-brown);
+            font-size: 1.4rem;
+        }
+
+        .footer-stack {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--body-text);
+            margin-bottom: 1rem;
+        }
+
+        .footer-credits {
+            font-size: 0.8rem;
+            color: #888;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.6;
+        }
+
+        .copyright {
+            font-size: 0.75rem;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 1100px) {
+
+            .hero-grid,
+            .secondary-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-grid,
+            .secondary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-badges {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <span class="header-icon">🏛️</span>
+        <div class="subtitle-main">Heritage Research Suite</div>
+        <h1>Sri Lankan Heritage Research Suite</h1>
+        <div class="subheader">AI-Driven Adaptive Cultural Knowledge & Interactive Exploration Platform for Museums
+        </div>
+        <p class="context-line">Integrating museum-verified datasets, explainable AI models, and interactive simulations
+        </p>
+    </header>
+
+    <div class="hero-grid">
+        <!-- AI Scenario Generator -->
+        <div class="card">
+            <div class="card-icon-container">🤖</div>
+            <h2>AI Scenario Generator</h2>
+            <div class="tags">
+                <span class="tag">RAG-based Reasoning</span>
+                <span class="tag">Fine-tuned GPT Model</span>
+                <span class="tag">What-If Scenarios</span>
+                <span class="tag">Historical Analysis</span>
+            </div>
+            <p>
+                Explore counterfactual historical scenarios using a fine-tuned AI model. Ask "What if" questions 
+                about Sri Lankan artifacts and receive detailed three-branch scenario analyses grounded in historical context.
+            </p>
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                AI Service: Online
+            </div>
+            <a href="http://localhost:3000" target="_blank" class="btn">Launch What-If Explorer</a>
+        </div>
+
+        <!-- Artifact Explorer -->
+        <div class="card">
+            <div class="card-icon-container">🏺</div>
+            <h2>Artifact Explorer</h2>
+            <div class="tags">
+                <span class="tag">AI Text Similarity</span>
+                <span class="tag">T5 Language Model</span>
+                <span class="tag">Museum Dataset Driven</span>
+                <span class="tag">Explainable AI (XAI)</span>
+            </div>
+            <p>
+                Explore digitized Sri Lankan museum artifacts, discover semantically similar objects,
+                and receive structured AI-generated explanations grounded in curatorial metadata.
+            </p>
+            <a href="http://localhost:5173" target="_blank" class="btn">Launch Explorer</a>
+        </div>
+
+        <!-- Craft Simulation -->
+        <div class="card">
+            <div class="card-icon-container">🎨</div>
+            <h2>Craft Simulation</h2>
+            <div class="tags">
+                <span class="tag">2D Interactive Simulation</span>
+                <span class="tag">Cultural Guidance Overlays</span>
+                <span class="tag">Learning-by-Doing</span>
+                <span class="tag">Gamified Heritage Education</span>
+            </div>
+            <p>
+                Learn traditional Sri Lankan crafts such as Kandyan painting, Kolam mask design,
+                and pottery through guided, interactive 2D simulations.
+            </p>
+            <a href="http://localhost:3001" target="_blank" class="btn">Start Simulation</a>
+        </div>
+    </div>
+
+    <!-- Secondary Grid -->
+    <div class="secondary-grid">
+        <div class="info-card">
+            <h3>Verified Datasets</h3>
+            <p>All AI models are trained and grounded using museum-verified historical datasets and archival
+                collections.</p>
+        </div>
+        <div class="info-card">
+            <h3>Research-Grade AI</h3>
+            <p>Built for academic rigor with transparent reasoning, explainable outputs, and citation-based responses.
+            </p>
+        </div>
+        <div class="info-card">
+            <h3>Educational Purpose</h3>
+            <p>Designed for scholars, students, and cultural enthusiasts to explore Sri Lankan heritage responsibly.</p>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-logo">🪷</span>
+        <div class="footer-badges">
+            <div class="badge">
+                <span class="badge-icon">✓</span>
+                Dataset Verified
+            </div>
+            <div class="badge">
+                <span class="badge-icon">👁</span>
+                AI Transparency
+            </div>
+            <div class="badge">
+                <span class="badge-icon">🎓</span>
+                Research & Education
+            </div>
+        </div>
+
+        <div class="footer-stack">Powered by Sri Lankan Museum Historical Datasets</div>
+        <p class="footer-credits">
+            AI Models: Retrieval-Augmented Generation, T5 Language Model, Semantic Similarity Engine<br>
+            Designed for academic research and educational use
+        </p>
+        <div class="copyright">© 2024 Sri Lankan Heritage Research Suite. All rights reserved.</div>
+    </footer>
+</body>
+
+</html>
