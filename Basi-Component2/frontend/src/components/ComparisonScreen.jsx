@@ -17,7 +17,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
   const [apiComparison, setApiComparison] = useState(null);
   const [comparisonError, setComparisonError] = useState(null);
   const [activeHotspot, setActiveHotspot] = useState(null);
-  
+
   // Visual comparison states
   const [showVisualModal, setShowVisualModal] = useState(false);
   const [isLoadingVisual, setIsLoadingVisual] = useState(false);
@@ -65,7 +65,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
     setIsLoadingVisual(true);
     setVisualError(null);
     setShowVisualModal(true);
-    
+
     try {
       const response = await fetch(`${API_BASE}/compare/visual`, {
         method: 'POST',
@@ -83,11 +83,11 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
       }
 
       const data = await response.json();
-      
+
       if (data.error) {
         throw new Error(data.error);
       }
-      
+
       setVisualComparison(data);
     } catch (err) {
       console.error('Error generating visual comparison:', err);
@@ -296,7 +296,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
             />
           </div>
           <div className="p-4 sm:p-5 md:p-6">
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-stone-800 mb-3 sm:mb-4 line-clamp-2">
+            <h2 className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-stone-800 mb-3 sm:mb-4 line-clamp-2">
               {artifactA.name}
             </h2>
             <div className="space-y-1.5 sm:space-y-2">
@@ -621,7 +621,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
           onClick={() => setShowVisualModal(false)}>
           <div className="bg-white rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}>
-            
+
             {/* Modal Header */}
             <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6 rounded-t-xl border-b border-indigo-500 z-10">
               <div className="flex items-center justify-between">
@@ -663,7 +663,45 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
                 </div>
               ) : visualComparison?.visual_comparison ? (
                 <div className="space-y-6">
+                  {/* Side-by-Side Images */}
+                  <div className="grid grid-cols-2 gap-4 p-4 bg-stone-50 rounded-xl border border-stone-200">
+                    {/* Image A */}
+                    <div className="flex flex-col gap-2">
+                      <div className="relative aspect-[4/3] bg-white rounded-lg border border-stone-200 overflow-hidden shadow-sm group">
+                        <img
+                          src={artifactA.image}
+                          alt={artifactA.name}
+                          className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute top-2 left-2 bg-amber-100/90 backdrop-blur-sm px-2 py-1 rounded-md border border-amber-200 shadow-sm">
+                          <span className="text-[10px] sm:text-xs font-bold text-amber-800 tracking-wide uppercase">Artifact A</span>
+                        </div>
+                      </div>
+                      <p className="text-xs sm:text-sm font-medium text-center text-stone-700 font-serif line-clamp-1">
+                        {artifactA.name}
+                      </p>
+                    </div>
+
+                    {/* Image B */}
+                    <div className="flex flex-col gap-2">
+                      <div className="relative aspect-[4/3] bg-white rounded-lg border border-stone-200 overflow-hidden shadow-sm group">
+                        <img
+                          src={artifactB.image}
+                          alt={artifactB.name}
+                          className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute top-2 left-2 bg-slate-100/90 backdrop-blur-sm px-2 py-1 rounded-md border border-slate-200 shadow-sm">
+                          <span className="text-[10px] sm:text-xs font-bold text-slate-700 tracking-wide uppercase">Artifact B</span>
+                        </div>
+                      </div>
+                      <p className="text-xs sm:text-sm font-medium text-center text-stone-700 font-serif line-clamp-1">
+                        {artifactB.name}
+                      </p>
+                    </div>
+                  </div>
+
                   {/* Comparison Grid */}
+
                   <div className="grid grid-cols-3 gap-4">
                     {/* Header Row */}
                     <div className="font-semibold text-stone-700 text-sm"></div>
