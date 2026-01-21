@@ -5,8 +5,8 @@ This replaces free-form questions with structured scenario selection
 
 SCENARIO_CATEGORIES = {
     "historical_impact": {
-        "name": "Historical Impact Analysis",
-        "description": "Explore how this artifact influenced major historical events and societal changes",
+        "name": "Political & Dynastic Context Analysis",
+        "description": "Examine this artifact within Anuradhapura, Polonnaruwa, and Kandyan kingdom periods",
         "icon": "🏛️",
         "color": "blue",
         "prompt_template": """Analyze the historical impact of this artifact in Sri Lankan history.
@@ -23,8 +23,8 @@ For each perspective, provide detailed historical evidence and implications."""
     },
     
     "cultural_exchange": {
-        "name": "Cultural Exchange Pathways",
-        "description": "Investigate how this artifact reflects cultural interactions between civilizations",
+        "name": "Maritime Silk Road Connections",
+        "description": "Trace Indian Ocean trade routes and cultural exchanges with Asia, Middle East, and Europe",
         "icon": "🌏",
         "color": "green",
         "prompt_template": """Examine the cultural exchange and cross-cultural connections related to this artifact.
@@ -41,8 +41,8 @@ For each pathway, provide specific evidence of cultural exchange and mutual infl
     },
     
     "ritual_significance": {
-        "name": "Ritual & Religious Significance",
-        "description": "Uncover the spiritual and ceremonial importance of this artifact",
+        "name": "Buddhist & Hindu Iconography Study",
+        "description": "Decode religious symbols, ritual functions, and temple/monastic connections",
         "icon": "🕉️",
         "color": "purple",
         "prompt_template": """Explore the ritual, religious, and ceremonial significance of this artifact.
@@ -59,8 +59,8 @@ For each dimension, explain specific ritual practices and spiritual meanings."""
     },
     
     "craft_technology": {
-        "name": "Craft & Technology Evolution",
-        "description": "Examine the technical skills and innovations embedded in this artifact",
+        "name": "Traditional Craftsmanship & Techniques",
+        "description": "Analyze artisan guilds, metallurgy, pottery, textile weaving, and woodcarving methods",
         "icon": "🔨",
         "color": "orange",
         "prompt_template": """Analyze the craftsmanship, technology, and material knowledge demonstrated by this artifact.
@@ -77,8 +77,8 @@ For each aspect, provide technical details and evidence of skill development."""
     },
     
     "colonial_transformation": {
-        "name": "Colonial Period Transformation",
-        "description": "Analyze how colonial contact affected the artifact's use and meaning",
+        "name": "Colonial Impact Assessment (1505-1948)",
+        "description": "Study Portuguese, Dutch, and British influences on artifact usage and preservation",
         "icon": "⚓",
         "color": "red",
         "prompt_template": """Examine how colonial contact (Portuguese, Dutch, British) affected this artifact and its cultural context.
@@ -95,8 +95,8 @@ For each phase, describe specific changes in usage, meaning, or preservation."""
     },
     
     "trade_networks": {
-        "name": "Trade Routes & Commerce",
-        "description": "Map the commercial networks and economic systems connected to this artifact",
+        "name": "Indian Ocean Trade Networks",
+        "description": "Map cinnamon, gems, ivory trade routes connecting Lanka to Arabia, China, and Rome",
         "icon": "🚢",
         "color": "teal",
         "prompt_template": """Investigate the trade networks, commercial systems, and economic importance of this artifact.
@@ -113,8 +113,8 @@ For each dimension, provide evidence of commercial activity and economic signifi
     },
     
     "preservation_heritage": {
-        "name": "Heritage & Preservation Journey",
-        "description": "Trace how this artifact was preserved and its journey to museum status",
+        "name": "Museum Provenance & Documentation",
+        "description": "Track excavation history, collector records, and National Museum acquisition details",
         "icon": "🏺",
         "color": "amber",
         "prompt_template": """Trace the preservation history and heritage journey of this artifact from creation to present.
@@ -131,8 +131,8 @@ For each stage, describe the changing relationship between artifact and society.
     },
     
     "comparative_analysis": {
-        "name": "Comparative Cultural Analysis",
-        "description": "Compare this artifact with similar objects from other civilizations",
+        "name": "Cross-Cultural Comparative Study",
+        "description": "Compare with Chola, Pallava, Khmer, and Gupta period artifacts to identify influences",
         "icon": "🔍",
         "color": "indigo",
         "prompt_template": """Perform a comparative analysis of this artifact with similar objects from other cultures.
@@ -146,6 +146,42 @@ Generate a comparative analysis with exactly 3 cultural comparisons:
 3. Unique Sri Lankan Features - Distinctive characteristics that make it uniquely Sri Lankan
 
 For each comparison, highlight similarities, differences, and cultural uniqueness."""
+    },
+    
+    "archaeological_conservation": {
+        "name": "Material Analysis & Conservation",
+        "description": "Apply radiocarbon dating, XRF analysis, and modern preservation techniques",
+        "icon": "🔬",
+        "color": "cyan",
+        "prompt_template": """Analyze this artifact from archaeological and conservation science perspectives.
+
+Artifact Context:
+{context}
+
+Generate an archaeological conservation analysis with exactly 3 scientific dimensions:
+1. Archaeological Context - Excavation site, stratigraphy, dating methods, and archaeological significance
+2. Scientific Analysis - Material composition, chemical analysis, age determination, and authenticity verification
+3. Conservation Challenges - Deterioration factors, preservation techniques, and restoration approaches
+
+For each dimension, provide specific scientific evidence and conservation methodologies."""
+    },
+    
+    "patronage_social_status": {
+        "name": "Royal Patronage & Court Culture",
+        "description": "Investigate royal workshops, court artisans, and elite commissioning practices",
+        "icon": "👑",
+        "color": "pink",
+        "prompt_template": """Examine the patronage systems, ownership patterns, and social status symbolism of this artifact.
+
+Artifact Context:
+{context}
+
+Generate a patronage and social status analysis with exactly 3 hierarchical perspectives:
+1. Royal & Elite Patronage - Commission by royalty, nobility, or wealthy patrons; courtly connections
+2. Social Status Symbolism - What this artifact signified about wealth, power, education, or religious devotion
+3. Access & Exclusivity - Who could own, use, or view this artifact; social restrictions and privileges
+
+For each perspective, explain the relationship between artifact and social stratification."""
     }
 }
 

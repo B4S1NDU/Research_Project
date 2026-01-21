@@ -131,8 +131,8 @@ function ArtifactDetailPage() {
                       key={index}
                       onClick={() => setSelectedImage(img)}
                       className={`flex-shrink-0 w-16 h-16 rounded-lg border-2 overflow-hidden transition-all ${selectedImage === img
-                          ? 'border-primary ring-2 ring-primary ring-opacity-50'
-                          : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-primary ring-2 ring-primary ring-opacity-50'
+                        : 'border-gray-200 hover:border-gray-300'
                         }`}
                     >
                       <img
@@ -229,7 +229,7 @@ function ArtifactDetailPage() {
                 Choose Analysis Scenario
               </h3>
               <p className="text-gray-600 mb-6">
-                Select a predefined historical analysis scenario to explore this artifact from different academic perspectives.
+                Select an historical analysis scenario to explore this artifact from different academic perspectives.
               </p>
 
               {loadingScenarios ? (
@@ -246,8 +246,8 @@ function ArtifactDetailPage() {
                         key={scenario.id}
                         onClick={() => handleSelectScenario(scenario)}
                         className={`text-left p-4 border-2 rounded-lg transition-all duration-200 ${selectedScenario?.id === scenario.id
-                            ? getSelectedColorClass(scenario.color) + ' ring-2 ring-offset-2'
-                            : getColorClass(scenario.color)
+                          ? getSelectedColorClass(scenario.color) + ' ring-2 ring-offset-2'
+                          : getColorClass(scenario.color)
                           }`}
                       >
                         <div className="flex items-start space-x-3">
