@@ -3,16 +3,26 @@ import axios from 'axios';
 const API_BASE_URL = '/api';
 
 export const apiService = {
-  // Ask a what-if question about an artifact
-  async askQuestion(artid, question) {
+  // Get list of available analysis scenarios
+  async getScenarios() {
     try {
-      const response = await axios.post(`${API_BASE_URL}/answer`, {
+      const response = await axios.get(`${API_BASE_URL}/scenarios`);
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.error || 'Failed to fetch scenarios');
+    }
+  },
+
+  // Generate scenario-based analysis for an artifact
+  async generateScenarioAnalysis(artid, scenarioId) {
+    try {
+      const response = await axios.post(`${API_BASE_URL}/generate`, {
         artid,
-        question
+        scenario_id: scenarioId
       });
       return response.data;
     } catch (error) {
-      throw new Error(error.response?.data?.error || 'Failed to generate scenarios');
+      throw new Error(error.response?.data?.error || 'Failed to generate analysis');
     }
   },
 

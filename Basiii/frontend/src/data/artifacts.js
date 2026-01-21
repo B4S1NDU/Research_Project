@@ -7,7 +7,7 @@ export const artifacts = [
     period: 'Kandyan Era',
     era: '1590–1815',
     location: 'Kandy, Sri Lanka',
-    image: '/images/kasthane.jpg',
+    images: ['/images/kasthane.jpg'],
     description: 'The Kastāne was used by Kandyan nobles and ceremonial guards. It symbolizes resistance during the Kandyan Wars (1590–1815), when the kingdom fought Portuguese, Dutch, and British invasions.'
   },
   {
@@ -18,7 +18,7 @@ export const artifacts = [
     period: 'Kandyan Era',
     era: '1700–1800',
     location: 'Temple of the Tooth / Degaldoruwa Temple',
-    image: '/images/mural.jpg',
+    images: ['/images/mural.jpg'],
     description: 'Kandyan murals depict Buddhist religious scenes using natural pigments. They illustrate Jataka tales, floral motifs, and distinctive Kandyan visual styles.'
   },
   {
@@ -29,7 +29,7 @@ export const artifacts = [
     period: '18th century',
     era: '1735 – Present',
     location: 'Southern Sri Lanka (Ambalangoda)',
-    image: '/images/kolam-mask.jpg',
+    images: ['/images/kolam-mask.jpg'],
     description: 'Used in Kolam dance dramas blending humor, satire, and folklore. Traditionally carved from kaduru wood. Kolam performances include characters such as kings, queens, village elders, demons, and social caricatures.'
   },
   {
@@ -40,7 +40,7 @@ export const artifacts = [
     period: 'Pre-Colonial to Present',
     era: '1000 BCE – Present',
     location: 'Anuradhapura, Hambantota, Kurunegala',
-    image: '/images/clay-pot.jpg',
+    images: ['/images/clay-pot.jpg'],
     description: 'Clay pottery has been used in Sri Lanka for millennia for cooking, water storage, and rituals. Early civilizations used hand-coiled or wheel-turned clay vessels made from local red clay.'
   },
   {
@@ -51,7 +51,7 @@ export const artifacts = [
     period: 'Pre‑colonial to Present',
     era: '3rd century BCE – Present',
     location: 'Kandy / Low-country Sri Lanka',
-    image: '/images/drum.jpg',
+    images: ['/images/Geta_Bera.jpg', '/images/yak_bera.jpg'],
     description: 'The Geta Bera is a double-headed, barrel-shaped drum used in Kandyan dance. Yak Bera is used in low-country dance traditions, often in ritual and mask dance contexts.'
   },
   {
@@ -62,7 +62,7 @@ export const artifacts = [
     period: 'Polonnaruwa Era',
     era: '11th–12th century CE',
     location: 'Polonnaruwa, Sri Lanka',
-    image: '/images/moonstone.jpg',
+    images: ['/images/moonstone.jpg'],
     description: 'The Polonnaruwa Moonstone is a semicircular stone slab carved with concentric bands of animals and floral patterns, found at the entrance of ancient buildings in Polonnaruwa. It symbolizes the cycle of samsara and reflects the fusion of Buddhist symbolism with Sinhalese craftsmanship.'
   },
   {
@@ -73,7 +73,7 @@ export const artifacts = [
     period: 'Sigiriya Period',
     era: '477–495 CE',
     location: 'Sigiriya, Sri Lanka',
-    image: '/images/fresco.jpg',
+    images: ['/images/fresco.jpg'],
     description: 'The Sigiriya Frescoes are painted on the western rock face of the Sigiriya fortress, depicting female figures believed to be celestial beings (apsaras) or royal attendants. Executed with natural pigments on plaster, these vibrant frescoes showcase sophisticated technique, perspective, and color usage.'
   },
   {
@@ -84,7 +84,7 @@ export const artifacts = [
     period: 'Polonnaruwa Era',
     era: '11th–12th century CE',
     location: 'Polonnaruwa, Sri Lanka',
-    image: '/images/vatadage.jpg',
+    images: ['/images/relic-casket.jpg', '/images/Polonnaruwa_Vatadage.jpeg'],
     description: 'The Polonnaruwa Vatadage Relic Casket is a circular stone shrine built to house sacred relics of the Buddha. It was part of the larger Vatadage structure, which exemplifies the Polonnaruwa period\'s architectural innovation and devotion to Buddhist practice.'
   },
   {
@@ -95,7 +95,7 @@ export const artifacts = [
     period: 'Anuradhapura Period',
     era: '6th–7th century CE',
     location: 'Isurumuniya Temple, Anuradhapura, Sri Lanka',
-    image: '/images/lovers.jpg',
+    images: ['/images/pem-y.jpeg'],
     description: 'The Isurumuniya Lovers is a renowned granite sculpture depicting a seated couple, traditionally identified as Saliya and Asokamala or a divine pair. It demonstrates sophisticated Anuradhapura-era stone carving techniques with smooth surfaces and naturalistic body forms.'
   },
   {
@@ -106,7 +106,7 @@ export const artifacts = [
     period: 'Polonnaruwa Period',
     era: '1170–1196 CE',
     location: 'Polonnaruwa, Sri Lanka',
-    image: '/images/mandapa.jpg',
+    images: ['/images/mandapa.jpg'],
     description: 'The Nissankalata Mandapa is a finely carved stone pavilion commissioned by King Nissanka Malla in Polonnaruwa. Its pillars and capitals feature elaborate floral designs, lions, and mythological motifs, demonstrating Polonnaruwa-era architectural and sculptural mastery.'
   }
 ];

@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 function ArtifactCard({ artifact }) {
   return (
     <div className="card hover:scale-105">
-      <div className="aspect-w-4 aspect-h-3 bg-gray-200">
+      <div className="aspect-w-4 aspect-h-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-t-lg p-3">
         <img
-          src={artifact.image}
+          src={artifact.images[0]}
           alt={artifact.name}
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-contain bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-2"
           onError={(e) => {
             e.target.src = `https://via.placeholder.com/400x300/8B7355/ffffff?text=${encodeURIComponent(artifact.name.substring(0, 20))}`;
           }}
@@ -25,7 +25,7 @@ function ArtifactCard({ artifact }) {
           to={`/artifact/${artifact.id}`}
           className="block w-full text-center bg-primary hover:bg-primary-dark text-white py-2 rounded-md transition-colors duration-200 font-medium"
         >
-          Ask a Question
+          Explore Scenarios
         </Link>
       </div>
     </div>
