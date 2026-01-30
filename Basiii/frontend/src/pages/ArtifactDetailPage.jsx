@@ -98,27 +98,29 @@ function ArtifactDetailPage() {
     <div className="min-h-screen bg-beige">
       <Header showDashboard />
 
-      <main className="max-w-full mx-auto px-6 lg:px-12 py-8">
-        {/* Breadcrumb */}
-        <nav className="text-sm text-gray-600 mb-6">
-          <Link to="/" className="hover:text-primary">Home</Link>
-          <span className="mx-2">›</span>
-          <Link to="/" className="hover:text-primary">Artifacts</Link>
-          <span className="mx-2">›</span>
-          <span className="text-gray-800">{artifact.name}</span>
-        </nav>
+      <main className="w-full px-6 lg:px-12 py-8">
+        {/* Big Back Button */}
+        <Link
+          to="/"
+          className="inline-flex items-center text-orange-500 hover:text-orange-600 mb-12 transition-all font-bold group bg-white/50 px-10 py-5 rounded-2xl border-2 border-orange-500 shadow-lg hover:shadow-orange-500/20 active:scale-95"
+        >
+          <svg className="w-8 h-8 mr-4 transform group-hover:-translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span className="text-2xl uppercase tracking-[0.2em]">Back to Explorer</span>
+        </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Artifact Details */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-lg p-6 sticky top-8">
-              <div className="bg-gradient-to-br from-amber-50 via-white to-gray-50 rounded-xl p-4 mb-6 border-2 border-amber-100 shadow-inner" style={{ minHeight: '256px' }}>
+            <div className="bg-white rounded-2xl shadow-xl p-8 sticky top-8 border border-gray-100">
+              <div className="bg-gradient-to-br from-amber-50 via-white to-gray-50 rounded-2xl p-6 mb-8 border-2 border-amber-100 shadow-inner flex items-center justify-center" style={{ minHeight: '400px' }}>
                 <img
                   src={selectedImage || artifact.images[0]}
                   alt={artifact.name}
-                  className="w-full max-h-64 object-contain rounded-lg drop-shadow-2xl hover:scale-105 transition-transform duration-300"
+                  className="w-full max-h-[450px] object-contain rounded-xl drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-500 cursor-zoom-in"
                   onError={(e) => {
-                    e.target.src = `https://via.placeholder.com/400x400/8B7355/ffffff?text=${encodeURIComponent(artifact.name.substring(0, 15))}`;
+                    e.target.src = `https://via.placeholder.com/600x600/8B7355/ffffff?text=${encodeURIComponent(artifact.name.substring(0, 15))}`;
                   }}
                 />
               </div>
@@ -145,73 +147,44 @@ function ArtifactDetailPage() {
                 </div>
               )}
 
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">{artifact.name}</h2>
+              <h2 className="text-4xl font-serif font-bold text-gray-800 mb-8 leading-tight block">{artifact.name}</h2>
 
-              <div className="space-y-3 text-sm">
-                <div>
-                  <div className="flex items-center text-gray-600 mb-1">
-                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <div className="space-y-6 text-lg border-t border-gray-100 pt-8">
+                <div className="flex items-start">
+                  <div className="bg-amber-100 p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-amber-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-semibold">Category</span>
                   </div>
-                  <p className="text-gray-800 ml-6">{artifact.category}</p>
+                  <div>
+                    <span className="font-bold text-gray-500 uppercase text-xs tracking-widest block mb-1">Category</span>
+                    <p className="text-gray-900 font-semibold">{artifact.category}</p>
+                  </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center text-gray-600 mb-1">
-                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-start">
+                  <div className="bg-blue-100 p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-semibold">Period</span>
                   </div>
-                  <p className="text-gray-800 ml-6">{artifact.period}</p>
+                  <div>
+                    <span className="font-bold text-gray-500 uppercase text-xs tracking-widest block mb-1">Period & Era</span>
+                    <p className="text-gray-900 font-semibold">{artifact.period} • {artifact.era}</p>
+                  </div>
                 </div>
 
-                <div>
-                  <div className="flex items-center text-gray-600 mb-1">
-                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-semibold">Era</span>
-                  </div>
-                  <p className="text-gray-800 ml-6">{artifact.era}</p>
-                </div>
-
-                <div>
-                  <div className="flex items-center text-gray-600 mb-1">
-                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <div className="flex items-start">
+                  <div className="bg-green-100 p-2 rounded-lg mr-4">
+                    <svg className="w-6 h-6 text-green-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                     </svg>
-                    <span className="font-semibold">Location</span>
                   </div>
-                  <p className="text-gray-800 ml-6">{artifact.location}</p>
+                  <div>
+                    <span className="font-bold text-gray-500 uppercase text-xs tracking-widest block mb-1">Location</span>
+                    <p className="text-gray-900 font-semibold">{artifact.location}</p>
+                  </div>
                 </div>
-
-                {artifact.dimensions && (
-                  <div>
-                    <div className="flex items-center text-gray-600 mb-1">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                      </svg>
-                      <span className="font-semibold">Dimensions</span>
-                    </div>
-                    <p className="text-gray-800 ml-6">{artifact.dimensions}</p>
-                  </div>
-                )}
-
-                {artifact.material && (
-                  <div>
-                    <div className="flex items-center text-gray-600 mb-1">
-                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                        <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clipRule="evenodd" />
-                      </svg>
-                      <span className="font-semibold">Material</span>
-                    </div>
-                    <p className="text-gray-800 ml-6">{artifact.material}</p>
-                  </div>
-                )}
               </div>
 
               <div className="mt-6 pt-6 border-t border-gray-200">
@@ -225,10 +198,10 @@ function ArtifactDetailPage() {
           {/* Right Column - Scenario Selection */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
+              <h3 className="text-3xl font-serif font-bold text-gray-800 mb-4">
                 Choose Analysis Scenario
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-lg text-gray-600 mb-8">
                 Select an historical analysis scenario to explore this artifact from different academic perspectives.
               </p>
 
@@ -245,25 +218,27 @@ function ArtifactDetailPage() {
                       <button
                         key={scenario.id}
                         onClick={() => handleSelectScenario(scenario)}
-                        className={`text-left p-4 border-2 rounded-lg transition-all duration-200 ${selectedScenario?.id === scenario.id
-                          ? getSelectedColorClass(scenario.color) + ' ring-2 ring-offset-2'
-                          : getColorClass(scenario.color)
+                        className={`text-left p-6 border-2 rounded-xl transition-all duration-300 ${selectedScenario?.id === scenario.id
+                          ? getSelectedColorClass(scenario.color) + ' ring-4 ring-offset-4 shadow-xl scale-[1.02]'
+                          : getColorClass(scenario.color) + ' shadow-md hover:shadow-lg'
                           }`}
                       >
-                        <div className="flex items-start space-x-3">
-                          <span className="text-3xl flex-shrink-0">{scenario.icon}</span>
+                        <div className="flex items-start space-x-5">
+                          <span className="text-5xl flex-shrink-0">{scenario.icon}</span>
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-gray-800 mb-1 text-sm">
+                            <h4 className="font-bold text-gray-800 mb-2 text-xl italic font-serif">
                               {scenario.name}
                             </h4>
-                            <p className="text-xs text-gray-600 line-clamp-2">
+                            <p className="text-sm text-gray-700 line-clamp-3 leading-relaxed">
                               {scenario.description}
                             </p>
                           </div>
                           {selectedScenario?.id === scenario.id && (
-                            <svg className="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                            </svg>
+                            <div className="bg-green-500 rounded-full p-1 shadow-lg">
+                              <svg className="w-6 h-6 text-white flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                              </svg>
+                            </div>
                           )}
                         </div>
                       </button>
@@ -274,9 +249,9 @@ function ArtifactDetailPage() {
                   <button
                     onClick={handleGenerateAnalysis}
                     disabled={!selectedScenario}
-                    className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg"
+                    className="w-full bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-6 px-8 rounded-2xl transition-all duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center space-x-4 shadow-2xl uppercase tracking-[0.2em] text-lg mt-8 active:scale-95 shadow-orange-500/20"
                   >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
                     </svg>
                     <span>

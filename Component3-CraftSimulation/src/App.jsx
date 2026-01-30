@@ -41,7 +41,12 @@ function App() {
   };
 
   const updateGameState = (updates) => {
-    setGameState(prev => ({ ...prev, ...updates }));
+    setGameState(prev => {
+      const newState = { ...prev, ...updates };
+      // Automatically calculate level based on score (1 level per 1000 points)
+      newState.level = Math.floor(newState.score / 1000) + 1;
+      return newState;
+    });
   };
 
   const renderCurrentCraft = () => {
@@ -103,7 +108,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 w-full max-w-[1920px] mx-auto p-6 md:p-8 flex flex-col">
+      <main className="flex-1 w-full p-4 md:p-6 lg:p-8 flex flex-col">
         {!currentCraft ? (
           <CraftSelector onCraftSelect={handleCraftSelect} />
         ) : (
