@@ -70,14 +70,14 @@ const SimilarArtifactCard = ({ artifact, onCompare, delay = 0 }) => {
             e.stopPropagation();
             onCompare();
           }}
-          className="w-full py-2.5 sm:py-3 bg-stone-100 hover:bg-amber-700 text-stone-700 
-                     hover:text-white rounded-xl font-sans text-sm sm:text-base font-medium 
-                     transition-all duration-300 flex items-center justify-center gap-2 sm:gap-2.5
-                     border border-stone-200 hover:border-amber-700 mt-auto"
+          className="w-full py-4 bg-white border-2 border-orange-500 text-orange-500 
+                     hover:bg-orange-500 hover:text-white rounded-2xl font-sans text-lg font-bold 
+                     transition-all duration-300 flex items-center justify-center gap-3
+                     shadow-md hover:shadow-xl active:scale-95 mt-auto"
         >
-          <Scale size={18} className="sm:w-5 sm:h-5" />
+          <Scale size={24} className="sm:w-6 sm:h-6" />
           <span>Compare</span>
-          <ArrowRight size={18} className="opacity-0 group-hover:opacity-100 transition-opacity sm:w-5 sm:h-5" />
+          <ArrowRight size={24} className="opacity-0 group-hover:opacity-100 transition-opacity sm:w-6 sm:h-6" />
         </button>
       </div>
     </div>
