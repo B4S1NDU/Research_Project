@@ -273,6 +273,15 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
     loadMasks();
   }, []);
 
+  // ========== RESET PROGRESS ON SELECTION ==========
+  useEffect(() => {
+    if (selectedMask) {
+      updateGameState({
+        progress: { ...gameState.progress, mask: 0 }
+      });
+    }
+  }, [selectedMask]);
+
   // ========== LOAD AND PROCESS IMAGE ==========
   useEffect(() => {
     if (!selectedMask || !canvasRef.current) return;
@@ -322,30 +331,36 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     const rect = canvas.getBoundingClientRect();
 
-    // CRITICAL: Correct coordinate mapping for any screen resolution
-    // This ensures clicks map correctly regardless of CSS scaling
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
     const x = Math.floor((e.clientX - rect.left) * scaleX);
     const y = Math.floor((e.clientY - rect.top) * scaleY);
 
-    console.log(`Canvas click at (${x}, ${y}) with color ${activeColor.hex}`);
-
-    // Bounds check
     if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) return;
 
     // Perform flood fill
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const filled = floodFill(imageData, x, y, activeColor.hex);
+
+    // Check if anything actually changed (floodFill returns same object if click on boundary/same color)
     ctx.putImageData(filled, 0, 0);
 
     // Update history for undo
     const newHistory = history.slice(0, historyIndex + 1);
-    newHistory.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    const currentFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    newHistory.push(currentFrame);
     if (newHistory.length > 30) newHistory.shift();
     setHistory(newHistory);
     setHistoryIndex(newHistory.length - 1);
-  }, [activeColor, selectedMask, isLoading, history, historyIndex]);
+
+    // Award points and update progress
+    // We treat each unique coloring action as progress
+    const newProgress = Math.min((historyIndex + 2) * 5, 100); // 5% per click up to 100%
+    updateGameState({
+      score: gameState.score + 100,
+      progress: { ...gameState.progress, mask: newProgress / 100 }
+    });
+  }, [activeColor, selectedMask, isLoading, history, historyIndex, gameState, updateGameState]);
 
   // ========== UNDO ==========
   const handleUndo = () => {
@@ -354,6 +369,13 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
       ctx.putImageData(history[historyIndex - 1], 0, 0);
       setHistoryIndex(historyIndex - 1);
+
+      // Update progress and subtract points
+      const newProgress = Math.min((historyIndex) * 5, 100);
+      updateGameState({
+        score: Math.max(0, gameState.score - 100),
+        progress: { ...gameState.progress, mask: newProgress / 100 }
+      });
     }
   };
 
@@ -365,6 +387,11 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
       ctx.putImageData(originalImageRef.current, 0, 0);
       setHistory([originalImageRef.current]);
       setHistoryIndex(0);
+
+      // Reset progress (don't subtract all points, just stay at current score but reset progress)
+      updateGameState({
+        progress: { ...gameState.progress, mask: 0 }
+      });
     }
   };
 
@@ -401,10 +428,19 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
   // ============================================================================
   if (!selectedMask) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      <div className="w-full h-full px-8 py-8">
         <div className="flex flex-col gap-8 animate-fade-in">
           {/* Title */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 relative">
+            {onBackToMenu && (
+              <button
+                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-xl border border-stone-200 text-museum-primary px-6 py-3 rounded-xl font-semibold hover:bg-stone-50 hover:border-museum-accent transition-all shadow-md flex items-center gap-2 group"
+                onClick={onBackToMenu}
+              >
+                <span className="group-hover:-translate-x-1 transition-transform">←</span>
+                <span>BACK TO MENU</span>
+              </button>
+            )}
             <h1 className="text-5xl font-serif font-bold text-museum-primary mb-2 drop-shadow-sm">
               🎭 Traditional Mask Coloring
             </h1>
@@ -427,28 +463,28 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
                 onMouseLeave={() => setHoveredCard(null)}
                 onClick={() => setSelectedMask(mask)}
               >
-                <div className="h-64 bg-stone-50 flex items-center justify-center p-6 relative overflow-hidden">
+                <div className="h-[400px] bg-stone-50 flex items-center justify-center p-10 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-stone-100/50 z-10" />
                   <img
                     src={mask.src}
                     alt={mask.name}
-                    className="h-full object-contain filter drop-shadow-lg transition-transform duration-700 ease-out z-0"
+                    className="h-full object-contain filter drop-shadow-2xl transition-transform duration-700 ease-out z-0"
                     style={{
-                      transform: hoveredCard === mask.id ? 'scale(1.1)' : 'none',
+                      transform: hoveredCard === mask.id ? 'scale(1.15)' : 'none',
                     }}
                   />
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col bg-white border-t border-stone-100">
-                  <h3 className="text-2xl font-serif font-bold text-museum-primary mb-2 group-hover:text-museum-accent transition-colors">{mask.name}</h3>
-                  <p className="text-sm text-museum-secondary mb-6 leading-relaxed flex-1">{mask.shortDescription}</p>
+                <div className="p-10 flex-1 flex flex-col bg-white border-t border-stone-100">
+                  <h3 className="text-3xl font-serif font-bold text-museum-primary mb-4 group-hover:text-museum-accent transition-colors">{mask.name}</h3>
+                  <p className="text-lg text-museum-secondary mb-8 leading-relaxed flex-1 font-light italic">"{mask.shortDescription}"</p>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    <span className="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-xs text-museum-primary font-bold tracking-wider flex items-center gap-1">📍 {mask.origin}</span>
-                    <span className="px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-xs text-museum-primary font-bold tracking-wider flex items-center gap-1">🎭 {mask.maskType}</span>
+                  <div className="flex flex-wrap gap-3 mb-8">
+                    <span className="px-4 py-2 rounded-full bg-stone-100 border border-stone-200 text-sm text-museum-primary font-bold tracking-wider flex items-center gap-2">📍 {mask.origin}</span>
+                    <span className="px-4 py-2 rounded-full bg-stone-100 border border-stone-200 text-sm text-museum-primary font-bold tracking-wider flex items-center gap-2">🎭 {mask.maskType}</span>
                   </div>
 
-                  <button className="w-full py-3 bg-museum-primary text-white font-bold tracking-widest rounded-xl hover:bg-black transition-all shadow-md flex items-center justify-center gap-2 group-hover:shadow-lg">
+                  <button className="w-full py-5 bg-museum-primary text-white font-bold tracking-widest text-lg rounded-2xl hover:bg-black transition-all shadow-lg flex items-center justify-center gap-3 group-hover:shadow-2xl active:scale-95">
                     <span>🎨</span> START COLORING
                   </button>
                 </div>
@@ -456,15 +492,7 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
             ))}
           </div>
 
-          {/* Back Button */}
-          {onBackToMenu && (
-            <button
-              className="fixed bottom-8 left-8 bg-white/90 backdrop-blur-xl border border-stone-200 text-museum-primary px-6 py-3 rounded-full font-semibold hover:bg-stone-50 hover:border-museum-accent transition-all shadow-lg z-50 flex items-center gap-2"
-              onClick={onBackToMenu}
-            >
-              <span>←</span> Back to Gallery
-            </button>
-          )}
+
         </div>
       </div>
     );
@@ -475,9 +503,15 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
   // ============================================================================
   return (
     <div className="w-full h-full flex flex-col p-4 relative">
-      <GameUI gameState={gameState} />
       {/* Header */}
-      <header className="flex flex-col items-center mb-6 z-10">
+      <header className="flex flex-col items-center mb-6 z-10 relative">
+        <button
+          className="absolute left-4 top-0 bg-white/90 backdrop-blur-xl border border-stone-200 text-museum-primary px-5 py-2 rounded-xl font-semibold hover:bg-stone-50 hover:border-museum-accent transition-all shadow-sm flex items-center gap-2 group"
+          onClick={() => setSelectedMask(null)}
+        >
+          <span className="group-hover:-translate-x-1 transition-transform">←</span>
+          <span className="text-sm">BACK TO MASKS</span>
+        </button>
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-museum-primary drop-shadow-sm mb-2">{selectedMask.name}</h1>
         <p className="text-lg text-museum-secondary font-medium tracking-wide">Touch any white area to fill with your selected color</p>
       </header>
@@ -596,13 +630,7 @@ function MaskColoring({ gameState, updateGameState, onBackToMenu }) {
         </div>
       </div>
 
-      {/* Floating Back Button */}
-      <button
-        className="fixed bottom-8 left-8 bg-white/90 backdrop-blur-xl border border-stone-200 text-museum-primary px-6 py-3 rounded-full font-semibold hover:bg-stone-50 hover:border-museum-accent transition-all shadow-lg z-[100] flex items-center gap-2"
-        onClick={() => setSelectedMask(null)}
-      >
-        <span>←</span> Choose Another Mask
-      </button>
+
     </div>
   );
 }

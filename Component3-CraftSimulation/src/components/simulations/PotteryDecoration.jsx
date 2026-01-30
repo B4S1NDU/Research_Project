@@ -13,11 +13,19 @@ import GameUI from '../GameUI';
 
 const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
   return (
-    <div className="w-full max-w-7xl mx-auto px-6 py-8">
+    <div className="w-full h-full px-8 py-8">
       <GameUI gameState={gameState} />
       <div className="flex flex-col items-center">
-        {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative w-full">
+          {onBackToMenu && (
+            <button
+              onClick={onBackToMenu}
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-white border border-stone-200 text-museum-primary px-6 py-3 rounded-xl font-semibold hover:bg-stone-50 hover:border-museum-accent transition-all shadow-md flex items-center gap-2 group"
+            >
+              <span className="group-hover:-translate-x-1 transition-transform">←</span>
+              <span>BACK TO MENU</span>
+            </button>
+          )}
           <h1 className="text-5xl font-serif font-bold text-museum-primary mb-4 drop-shadow-sm">🏺 Clay Pot Decoration</h1>
           <p className="text-xl text-museum-secondary font-light tracking-wide">
             Decorate pottery with ancient motifs and learn their symbolic meanings
@@ -63,13 +71,7 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
               </div>
             </div>
 
-            {/* Back Button */}
-            <button
-              onClick={onBackToMenu}
-              className="mt-12 px-8 py-4 bg-museum-primary text-white font-bold tracking-widest text-lg rounded-xl shadow-lg transition-all active:scale-95 flex items-center gap-2 mx-auto hover:bg-black"
-            >
-              <span>←</span> Back to Craft Selection
-            </button>
+
           </div>
         </div>
       </div>

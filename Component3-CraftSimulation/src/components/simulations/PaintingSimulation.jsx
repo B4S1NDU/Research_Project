@@ -14,9 +14,9 @@ import { loadAllDatasets } from '../../data/csvParser';
 import GameUI from '../GameUI';
 
 const SNAP_DISTANCE = 30;
-const PIECE_SIZE = { width: 100, height: 85 }; // Standardized for the new grid layout
-const TARGET_POSITION = { x: 380, y: 80 };
-const CANVAS_SIZE = { width: 1400, height: 600 };
+const PIECE_SIZE = { width: 140, height: 120 }; // Increased for better visibility
+const TARGET_POSITION = { x: 300, y: 40 };
+const CANVAS_SIZE = { width: 1600, height: 800 };
 
 // Custom hook to load images
 const useImageLoader = (src) => {
@@ -407,10 +407,19 @@ const PaintingSimulation = ({ gameState, updateGameState, onBackToMenu }) => {
   // If no painting is selected, show selection interface
   if (!selectedPainting) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-6 py-8">
+      <div className="w-full h-full px-8 py-8">
         <div className="flex flex-col gap-12">
           {/* Hero Section */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 relative">
+            {onBackToMenu && (
+              <button
+                onClick={onBackToMenu}
+                className="absolute left-0 top-1/2 -translate-y-1/2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-gold-primary/30 text-gold-primary rounded-xl transition-all flex items-center gap-2 group"
+              >
+                <span className="group-hover:-translate-x-1 transition-transform">←</span>
+                <span>BACK TO MENU</span>
+              </button>
+            )}
             <h1 className="text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold-primary to-gold-secondary mb-4 drop-shadow-sm">🎨 Royal Portrait Restoration</h1>
             <p className="text-xl text-ivory/70 font-light tracking-wide">Choose a Historical Painting to Restore</p>
           </div>
@@ -673,10 +682,17 @@ const PaintingSimulation = ({ gameState, updateGameState, onBackToMenu }) => {
   // If painting is selected but no difficulty, show difficulty selection with historical context
   if (selectedPainting && !selectedDifficulty) {
     return (
-      <div className="w-full max-w-7xl mx-auto px-6 py-8">
+      <div className="w-full h-full px-8 py-8">
         <div className="flex flex-col gap-8">
           {/* Hero Section */}
-          <div className="text-center mb-4">
+          <div className="text-center mb-4 relative">
+            <button
+              onClick={() => setSelectedPainting(null)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-gold-primary/30 text-gold-primary rounded-xl transition-all flex items-center gap-2 group"
+            >
+              <span className="group-hover:-translate-x-1 transition-transform">←</span>
+              <span>BACK TO LIST</span>
+            </button>
             <h1 className="text-5xl font-display font-bold text-gold-primary mb-2 drop-shadow-sm">👑 {selectedPainting.name}</h1>
             <p className="text-xl text-ivory/70 font-light tracking-wide">{selectedPainting.period} • {selectedPainting.dynasty}</p>
           </div>
@@ -929,13 +945,7 @@ const PaintingSimulation = ({ gameState, updateGameState, onBackToMenu }) => {
               ))}
             </div>
 
-            {/* Back Button */}
-            <button
-              onClick={() => setSelectedPainting(null)}
-              className="mt-12 px-8 py-4 bg-maroon-deep hover:bg-maroon-light border border-white/20 hover:border-white/40 text-white font-bold tracking-wide rounded-xl shadow-lg transition-all active:scale-95 flex items-center gap-2 mx-auto"
-            >
-              <span>←</span> Choose Different Painting
-            </button>
+
           </div>
         </div>
       </div>
@@ -990,6 +1000,12 @@ const PaintingSimulation = ({ gameState, updateGameState, onBackToMenu }) => {
                 onClick={resetPuzzle}
               >
                 <span className="text-sm font-sans tracking-wide">↺ Reset</span>
+              </button>
+              <button
+                className="bg-transparent hover:bg-white/5 text-gold-primary hover:text-white font-bold py-2 px-6 rounded border border-gold-primary/30 transition-all active:scale-95"
+                onClick={() => setSelectedDifficulty(null)}
+              >
+                <span className="text-sm font-sans tracking-wide">← Back to Info</span>
               </button>
             </div>
           </div>
