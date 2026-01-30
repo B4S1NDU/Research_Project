@@ -219,7 +219,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
         <p className="text-sm sm:text-base text-stone-500 font-sans">Missing artifact data for comparison</p>
         <button
           onClick={onBackToGallery}
-          className="mt-4 px-4 sm:px-6 py-2 bg-amber-700 text-white rounded-lg text-sm sm:text-base"
+          className="mt-10 px-10 py-5 bg-white border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white rounded-2xl text-2xl font-bold shadow-xl shadow-orange-500/10 active:scale-95 transition-all uppercase tracking-widest"
         >
           Return to Gallery
         </button>
@@ -259,22 +259,19 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
         <div className="flex flex-wrap gap-2 sm:gap-3">
           <button
             onClick={onBack}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-stone-100 
-                       hover:bg-stone-200 text-stone-700 rounded-lg 
-                       transition-colors font-sans text-xs sm:text-sm"
+            className="flex items-center gap-3 px-6 py-3 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl transition-all font-sans text-xl font-bold shadow-md active:scale-95 border-2 border-stone-200 hover:border-stone-300"
           >
-            <ArrowLeft size={14} className="sm:w-[18px] sm:h-[18px]" />
-            <span className="hidden xs:inline">Back to Artifact</span>
-            <span className="xs:hidden">Back</span>
+            <ArrowLeft size={24} className="sm:w-7 sm:h-7" />
+            <span>Back to Artifact</span>
           </button>
           <button
             onClick={onBackToGallery}
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-amber-700 
-                       hover:bg-amber-800 text-white rounded-lg 
-                       transition-colors font-sans text-xs sm:text-sm"
+            className="flex items-center gap-4 px-10 py-5 bg-white border-2 border-orange-500 text-orange-500 
+                       hover:bg-orange-500 hover:text-white rounded-2xl 
+                       transition-all font-sans text-2xl font-bold shadow-xl active:scale-95 shadow-orange-500/10"
           >
-            <Home size={14} className="sm:w-[18px] sm:h-[18px]" />
-            <span>Gallery</span>
+            <Home size={32} className="sm:w-10 sm:h-10" />
+            <span className="uppercase tracking-widest">Gallery</span>
           </button>
         </div>
       </div>
@@ -354,10 +351,10 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
             {showAiInsights && (
               <button
                 onClick={handleGenerateInsights}
-                className="flex items-center gap-1 text-amber-700 hover:text-amber-800 
-                           text-xs sm:text-sm font-sans"
+                className="flex items-center gap-2 text-orange-500 hover:text-orange-600 
+                           text-lg font-bold font-sans"
               >
-                <RefreshCw size={12} className="sm:w-3.5 sm:h-3.5" />
+                <RefreshCw size={20} className="sm:w-6 sm:h-6" />
                 <span>Regenerate</span>
               </button>
             )}

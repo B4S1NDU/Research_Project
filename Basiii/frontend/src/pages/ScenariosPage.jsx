@@ -200,15 +200,15 @@ function ScenariosPage() {
       <Header showDashboard />
 
       <main className="max-w-full mx-auto px-6 lg:px-12 py-8">
-        {/* Back Button */}
+        {/* Big Back Button */}
         <Link
           to={`/artifact/${id}`}
-          className="inline-flex items-center text-primary hover:text-primary-dark mb-6"
+          className="inline-flex items-center text-orange-500 hover:text-orange-600 mb-12 transition-all font-bold group bg-white/50 px-10 py-5 rounded-2xl border-2 border-orange-500 shadow-lg hover:shadow-orange-500/20 active:scale-95"
         >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          <svg className="w-8 h-8 mr-4 transform group-hover:-translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          Back to Artifact
+          <span className="text-2xl uppercase tracking-[0.2em]">Back to Artifact</span>
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

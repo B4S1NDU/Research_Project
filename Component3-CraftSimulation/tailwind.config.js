@@ -38,7 +38,7 @@ export default {
                     bg: '#FAFAF9',       // warm-white/stone-50
                     primary: '#292524',  // stone-800 (charcoal)
                     secondary: '#57534E',// stone-600 (neutral grey)
-                    accent: '#C2410C',   // orange-700 (terracotta)
+                    accent: '#F97316',   // orange-500 (terracotta-bright)
                     surface: '#FFFFFF',  // white
                     gold: '#B45309',     // amber-700 (antique gold for legacy support/accents)
                 }
