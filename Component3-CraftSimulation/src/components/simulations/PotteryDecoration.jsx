@@ -9,6 +9,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Stage, Layer, Image as KonvaImage, Group, Circle } from 'react-konva';
+import PotColoring from './PotColoring';
 
 // Available pots
 const AVAILABLE_POTS = [
@@ -63,7 +64,7 @@ const PotPiece = ({ piece, onDragEnd, isDragging, isRestored, potImage }) => {
 
 const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
   const [selectedPot, setSelectedPot] = useState(null);
-  const [mode, setMode] = useState('select'); // 'select', 'restore', 'decorate'
+  const [mode, setMode] = useState('select'); // 'select', 'restore', 'decorate', 'color'
   const [potPieces, setPotPieces] = useState([]);
   const [restoredPieces, setRestoredPieces] = useState([]);
   const [decorations, setDecorations] = useState([]);
@@ -216,8 +217,8 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
       // Check if all pieces are restored
       if (restoredPieces.length + 1 === potPieces.length) {
         setTimeout(() => {
-          alert('Pot restored! Now decorate it!');
-          setMode('decorate');
+          alert('Pot restored! Now you can color it!');
+          setMode('color');
         }, 500);
       }
     } else {
@@ -272,12 +273,12 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
   };
 
   return (
-    <div className="w-full h-screen overflow-hidden relative">
-      <div className="flex flex-col items-center h-full">
+    <div className="w-full h-screen overflow-y-auto relative">
+      <div className="flex flex-col items-center min-h-full">
         {/* Pot Selection */}
         {mode === 'select' && (
-          <div className="w-full h-full px-8 py-8">
-            <div className="flex flex-col gap-8 animate-fade-in">
+          <div className="w-full min-h-screen px-8 py-8 overflow-y-auto">
+            <div className="flex flex-col gap-8 animate-fade-in pb-20">{/* Title */}
               {/* Title */}
               <div className="text-center mb-4 relative">
                 {onBackToMenu && (
@@ -298,7 +299,7 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
               </div>
 
               {/* Pot Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 pb-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8 pb-32">
                 {AVAILABLE_POTS.map((pot) => (
                   <div
                     key={pot.id}
@@ -435,7 +436,7 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
 
         {/* Decoration Mode */}
         {mode === 'decorate' && selectedPot && (
-          <div className="w-full h-full flex flex-col">
+          <div className="w-full h-screen flex flex-col overflow-hidden">
             <div className="absolute top-24 left-6 right-6 z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-xl">
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-serif font-bold text-museum-primary">
@@ -517,6 +518,19 @@ const PotteryDecoration = ({ gameState, updateGameState, onBackToMenu }) => {
                 </Stage>
               </div>
           </div>
+        )}
+
+        {/* Coloring Mode - Separate Component */}
+        {mode === 'color' && (
+          <PotColoring 
+            onBackToMenu={() => {
+              setMode('select');
+              setPotPieces([]);
+              setRestoredPieces([]);
+              setDecorations([]);
+              setSelectedPot(null);
+            }}
+          />
         )}
 
       </div>
