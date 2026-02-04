@@ -36,10 +36,10 @@ const COLOR_PALETTE = [
 
 // Available pots for coloring (using Pot-deco images)
 const AVAILABLE_POTS = [
-  { id: 'pot1', name: 'Ancient Clay Vessel', image: 'Pot-deco (1).png' },
-  { id: 'pot2', name: 'Decorated Urn', image: 'Pot-deco (2).png' },
-  { id: 'pot3', name: 'Traditional Pot', image: 'Pot-deco (3).png' },
-  { id: 'pot4', name: 'Ceremonial Vessel', image: 'Pot-deco (4).png' },
+  { id: 'pot1', name: 'Ancient Clay Vessel', displayImage: 'Pot (1).jpg', coloringImage: 'Pot-deco (1).png' },
+  { id: 'pot2', name: 'Decorated Urn', displayImage: 'Pot (3).jpg', coloringImage: 'Pot-deco (2).png' },
+  { id: 'pot3', name: 'Traditional Pot', displayImage: 'Pot (4).jpg', coloringImage: 'Pot-deco (3).png' },
+  { id: 'pot4', name: 'Ceremonial Vessel', displayImage: 'Pot (5).jpg', coloringImage: 'Pot-deco (4).png' },
 ];
 
 // ============================================================================
@@ -189,7 +189,7 @@ const PotColoring = ({ onBackToMenu }) => {
       setIsImageLoaded(true);
     };
     
-    img.src = selectedPot.image;
+    img.src = selectedPot.coloringImage;
   }, [selectedPot, canvasSize]);
 
   // Handle canvas click for coloring
@@ -292,7 +292,7 @@ const PotColoring = ({ onBackToMenu }) => {
                   <div className="h-[450px] bg-gradient-to-b from-stone-50 to-white flex items-center justify-center p-12 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-stone-100/30 z-10" />
                     <img
-                      src={pot.image}
+                      src={pot.displayImage}
                       alt={pot.name}
                       className="h-full object-contain filter drop-shadow-2xl transition-transform duration-700 ease-out z-0"
                       style={{
