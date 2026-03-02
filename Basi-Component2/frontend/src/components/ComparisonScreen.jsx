@@ -354,8 +354,7 @@ const ComparisonScreen = ({ artifactA, artifactB, onBack, onBackToGallery }) => 
                 className="flex items-center gap-2 text-orange-500 hover:text-orange-600 
                            text-lg font-bold font-sans"
               >
-                <RefreshCw size={20} className="sm:w-6 sm:h-6" />
-                <span>Regenerate</span>
+              
               </button>
             )}
             <button
