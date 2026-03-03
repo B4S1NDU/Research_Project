@@ -26,7 +26,9 @@ def main():
     print("   3. Basiii Backend (Port 5001) - RAG Chat with Fine-tuned Model")
     print("   4. Basiii Frontend (Port 5174) - What-If Explorer")
     print("   5. Component3 Frontend (Port 3000) - Craft Simulation")
-    print("   6. Dashboard Server (Port 8000)")
+    print("   6. Admin / Moderation Server (Port 5002)")
+    print("   7. Admin Panel Frontend (Port 5175)")
+    print("   8. Dashboard Server (Port 8000)")
     print("="*80)
     print()
 
@@ -70,7 +72,23 @@ def main():
         "Component 3 Frontend (Simulation)"
     )
 
-    # 6. Start Dashboard HTTP Server (to allow cross-origin navigation)
+    # 6. Start Admin / Moderation Server
+    # Port: 5002
+    run_command(
+        "python admin_server.py",
+        base_dir,
+        "Admin Moderation Server (Port 5002)"
+    )
+
+    # 7. Start Admin Panel React Frontend
+    # Port: 5175
+    run_command(
+        "npm run dev",
+        os.path.join(base_dir, "admin_panel", "frontend"),
+        "Admin Panel Frontend (Port 5175)"
+    )
+
+    # 8. Start Dashboard HTTP Server (to allow cross-origin navigation)
     # Port: 8000
     run_command(
         "python -m http.server 8000",

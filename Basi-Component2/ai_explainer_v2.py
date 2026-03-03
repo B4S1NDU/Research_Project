@@ -338,7 +338,7 @@ class AIExplainer:
 
             if self._model_ready and self._artifact_ai_explainer:
                 try:
-                    print("🧠 Generating comparison narrative with T5 model...")
+                    print("🧠 Generating comparison analysis...")
                     t5_text = self._artifact_ai_explainer.compare_artifacts(artifact1, artifact2)
                     if t5_text and len(t5_text) > 50:
                         # Append the Cross-Cultural Insights section using the real
@@ -360,7 +360,7 @@ class AIExplainer:
                             )
                         comparison_text = t5_text + "\n\nCross-Cultural Insights\n" + insight
                         text_source = 't5_model'
-                        print(f"✅ T5 generated {len(t5_text)} chars")
+                        print(f"✅ Generated {len(t5_text)} chars")
                     else:
                         print("⚠ T5 output too short, keeping template text")
                 except Exception as t5_err:
@@ -368,7 +368,7 @@ class AIExplainer:
             else:
                 print("⚠ T5 not ready — using template text")
 
-            print(f"📝 Comparison text source: {text_source}")
+            print(f"📝 Comparison text source: {text_source} ")
 
             return {
                 'artifact1': artifact1,
